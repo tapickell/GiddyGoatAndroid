@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 
 	Button punch;
 	TextView textMarque;
-	String specials = "*** Daily Specials ***";
+	String specials = "* * *  Daily Specials  * * *";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
