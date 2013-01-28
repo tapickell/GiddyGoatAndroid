@@ -9,6 +9,7 @@ import java.net.URL;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.JsonReader;
@@ -58,7 +59,8 @@ public class MainActivity extends Activity {
 									int which) {
 								// goto scan view for scanning qr code for punch
 								Log.d("UI_PRESSED", "ContinueButtonPressed");
-
+								Intent openScanView = new Intent("me.toddpickell.giddygoat.SCANVIEW");
+								startActivity(openScanView);
 							}
 						});
 				alert.setButton2("Cancel",
