@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="Title">40sp</dimen>
+    <dimen name="smallerTitle">34sp</dimen>
+    <dimen name="topMarginTitleSmaller">10dp</dimen>
+    <dimen name="cardHieghtMax">120dp</dimen>
+    <dimen name="cardWorkHieght">25dp</dimen>
+    <dimen name="bufferSide">50dp</dimen>
+    <dimen name="bufferBott">75dp</dimen>
+    <dimen name="beanLeftSide">240dp</dimen>
+    <dimen name="negative_side_buffer">-15dp</dimen>
+    <dimen name="dp110">110dp</dimen>
+    <dimen name="dp160">160dp</dimen>
+    <dimen name="dp170">170dp</dimen>
+    <dimen name="dp180">180dp</dimen>
+    <dimen name="dp55">55dp</dimen>
+    <dimen name="dp45">45dp</dimen>
+    <dimen name="sp8">8sp</dimen>
+    <dimen name="sp12">12sp</dimen>
+</resources>
