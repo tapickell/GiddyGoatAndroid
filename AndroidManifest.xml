@@ -35,16 +35,6 @@
         <activity android:name="com.dm.zbar.android.scanner.ZBarScannerActivity"
             android:screenOrientation="landscape"
             android:label="@string/app_name" />
-        <activity
-            android:name="me.toddpickell.giddygoat.Scanner"
-            android:label="@string/app_name" 
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="me.toddpickell.giddygoat.SCANVIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <uses-library android:name="android.test.runner" />
     </application>
 
