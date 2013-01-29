@@ -6,6 +6,11 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import net.sourceforge.zbar.Symbol;
+
+import com.dm.zbar.android.scanner.ZBarConstants;
+import com.dm.zbar.android.scanner.ZBarScannerActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,6 +23,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -59,8 +65,13 @@ public class MainActivity extends Activity {
 									int which) {
 								// goto scan view for scanning qr code for punch
 								Log.d("UI_PRESSED", "ContinueButtonPressed");
-								Intent openScanView = new Intent("me.toddpickell.giddygoat.SCANVIEW");
-								startActivity(openScanView);
+								int ZBAR_SCANNER_REQUEST = 64;
+								Intent intent = new Intent(MainActivity.this, ZBarScannerActivity.class);
+								intent.putExtra(ZBarConstants.SCAN_MODES, new int[]{Symbol.QRCODE});
+								startActivityForResult(intent, ZBAR_SCANNER_REQUEST);
+//								Intent openScanView = new Intent("me.toddpickell.giddygoat.SCANVIEW");
+//								startActivity(openScanView);
+							
 							}
 						});
 				alert.setButton2("Cancel",
@@ -77,6 +88,32 @@ public class MainActivity extends Activity {
 			}
 		});
 
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		//
+		if (resultCode == RESULT_OK) {
+			// handle scan result
+			Toast.makeText(this, "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
+	        Toast.makeText(this, "Scan Result Type = " + data.getStringExtra(ZBarConstants.SCAN_RESULT_TYPE), Toast.LENGTH_SHORT).show();
+//			String contents = scanResult.getContents();
+//			Log.d("SCANNER", contents);
+//			if (contents != null) {
+//				// success popup
+//				AlertDialog alert = new AlertDialog.Builder(Scanner.this).create();
+//				alert.setTitle("Scan Successful");
+//				alert.setButton("Continue",	new DialogInterface.OnClickListener() {
+//
+//							@Override
+//							public void onClick(DialogInterface dialog,	int which) {
+//						
+//								Log.d("UI_PRESSED", "ContinueButtonPressed");
+//
+//							}
+//						});
+//			}
+		}
+		// else continue with any other code you need in the method
 	}
 
 	@Override

@@ -11,28 +11,28 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int gray_text=0x7f040000;
-        public static final int text_red=0x7f040001;
-        public static final int white_text=0x7f040002;
+        public static final int gray_text=0x7f050000;
+        public static final int text_red=0x7f050001;
+        public static final int white_text=0x7f050002;
     }
     public static final class dimen {
-        public static final int Title=0x7f050000;
-        public static final int beanLeftSide=0x7f050007;
-        public static final int bufferBott=0x7f050006;
-        public static final int bufferSide=0x7f050005;
-        public static final int cardHieghtMax=0x7f050003;
-        public static final int cardWorkHieght=0x7f050004;
-        public static final int dp110=0x7f050009;
-        public static final int dp160=0x7f05000a;
-        public static final int dp170=0x7f05000b;
-        public static final int dp180=0x7f05000c;
-        public static final int dp45=0x7f05000e;
-        public static final int dp55=0x7f05000d;
-        public static final int negative_side_buffer=0x7f050008;
-        public static final int smallerTitle=0x7f050001;
-        public static final int sp12=0x7f050010;
-        public static final int sp8=0x7f05000f;
-        public static final int topMarginTitleSmaller=0x7f050002;
+        public static final int Title=0x7f060000;
+        public static final int beanLeftSide=0x7f060007;
+        public static final int bufferBott=0x7f060006;
+        public static final int bufferSide=0x7f060005;
+        public static final int cardHieghtMax=0x7f060003;
+        public static final int cardWorkHieght=0x7f060004;
+        public static final int dp110=0x7f060009;
+        public static final int dp160=0x7f06000a;
+        public static final int dp170=0x7f06000b;
+        public static final int dp180=0x7f06000c;
+        public static final int dp45=0x7f06000e;
+        public static final int dp55=0x7f06000d;
+        public static final int negative_side_buffer=0x7f060008;
+        public static final int smallerTitle=0x7f060001;
+        public static final int sp12=0x7f060010;
+        public static final int sp8=0x7f06000f;
+        public static final int topMarginTitleSmaller=0x7f060002;
     }
     public static final class drawable {
         public static final int backgroundblue2x=0x7f020000;
@@ -70,12 +70,12 @@ public final class R {
         public static final int activity_main=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f060000;
-        public static final int credits=0x7f060005;
-        public static final int hello_world=0x7f060001;
-        public static final int menu_settings=0x7f060002;
-        public static final int punchButton=0x7f060004;
-        public static final int titlemain=0x7f060003;
+        public static final int app_name=0x7f040000;
+        public static final int credits=0x7f040005;
+        public static final int hello_world=0x7f040001;
+        public static final int menu_settings=0x7f040002;
+        public static final int punchButton=0x7f040004;
+        public static final int titlemain=0x7f040003;
     }
     public static final class style {
         /** 
