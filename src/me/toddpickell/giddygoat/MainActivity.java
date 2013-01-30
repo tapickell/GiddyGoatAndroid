@@ -14,9 +14,11 @@ import com.dm.zbar.android.scanner.ZBarScannerActivity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentCallbacks;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ public class MainActivity extends Activity {
 	private TextView textMarque;
 	private TextView punchCount;
 	public static final String CARD_FILENAME = "punch_card";
+	private OnSharedPreferenceChangeListener listener; 
 	private String specials = "* * *  Daily Specials  * * *";
 	private SharedPreferences punchCard;
 	private ShareActionProvider mShareActionProvider;
@@ -50,21 +53,40 @@ public class MainActivity extends Activity {
 		textMarque.setText(specials);
 		
 		punchCard = getSharedPreferences(CARD_FILENAME, MODE_PRIVATE);
+		Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
 		if (punchCard.contains("punches")) {
 			//card file already in place
 			//can I just set text view registered for changes??
 			//or do I update Int for text view then register??
 			//Android documentation is clear as mud :(
+			Log.d("PUNCH_CARD", "punch card has punches field");
+			Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
+			punchCount.setText(Integer.toString(punchCard.getInt("punches", 50)));
 			
 		} else {
 			//card file doesnt contain punches need to start as new card
 			//not sure if this wiil run on first run or not????
 			//documentation not very specific as to how to create a shared pref file.
+			Log.d("PUNCH_CARD", "added new punches field to shared pref file");
 			SharedPreferences.Editor editor = punchCard.edit();
 			editor.putInt("punches", 0);
 			editor.commit();
 			// #### maybe throw this onto other thread for performance ####
 		}
+		Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
+		listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+			
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+					String key) {
+				// TODO Auto-generated method stub
+				Log.d("SHARED_PREF", key.toString());
+				punchCount.setText(Integer.toString(punchCard.getInt("punches", 50)));
+			}
+		};
+		
+		punchCard.registerOnSharedPreferenceChangeListener(listener);
+		
 		String status = null;
 
 		// grab async thread to download twitter feed from ### could have method
@@ -117,6 +139,8 @@ public class MainActivity extends Activity {
 
 	}
 	
+
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//
 		if (resultCode == RESULT_OK) {
