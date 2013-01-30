@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,9 +32,12 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	Button punch;
-	TextView textMarque;
-	String specials = "* * *  Daily Specials  * * *";
+	private Button punch;
+	private TextView textMarque;
+	private TextView punchCount;
+	public static final String CARD_FILENAME = "punch_card";
+	private String specials = "* * *  Daily Specials  * * *";
+	private SharedPreferences punchCard;
 	private ShareActionProvider mShareActionProvider;
 
 	@Override
@@ -42,7 +46,25 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		punch = (Button) findViewById(R.id.button1);
 		textMarque = (TextView) findViewById(R.id.mytextview);
+		punchCount = (TextView) findViewById(R.id.textView1);
 		textMarque.setText(specials);
+		
+		punchCard = getSharedPreferences(CARD_FILENAME, MODE_PRIVATE);
+		if (punchCard.contains("punches")) {
+			//card file already in place
+			//can I just set text view registered for changes??
+			//or do I update Int for text view then register??
+			//Android documentation is clear as mud :(
+			
+		} else {
+			//card file doesnt contain punches need to start as new card
+			//not sure if this wiil run on first run or not????
+			//documentation not very specific as to how to create a shared pref file.
+			SharedPreferences.Editor editor = punchCard.edit();
+			editor.putInt("punches", 0);
+			editor.commit();
+			// #### maybe throw this onto other thread for performance ####
+		}
 		String status = null;
 
 		// grab async thread to download twitter feed from ### could have method
