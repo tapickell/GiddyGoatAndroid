@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 	private String specials = "* * *  Daily Specials  * * *";
 	private SharedPreferences punchCard;
 	private ShareActionProvider mShareActionProvider;
+	private String code = "2a73e02a88ee9bcb965cc0f22c0cabbf68d5e823992884b4514bc242b0146ff16d5cf349c374cf7c";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +119,7 @@ public class MainActivity extends Activity {
 								Intent intent = new Intent(MainActivity.this, ZBarScannerActivity.class);
 								intent.putExtra(ZBarConstants.SCAN_MODES, new int[]{Symbol.QRCODE});
 								startActivityForResult(intent, ZBAR_SCANNER_REQUEST);
-//								Intent openScanView = new Intent("me.toddpickell.giddygoat.SCANVIEW");
-//								startActivity(openScanView);
+
 							
 							}
 						});
@@ -141,28 +141,30 @@ public class MainActivity extends Activity {
 	
 
 
+	@SuppressWarnings("deprecation")
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//
 		if (resultCode == RESULT_OK) {
 			// handle scan result
-			Toast.makeText(this, "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
-	        Toast.makeText(this, "Scan Result Type = " + data.getStringExtra(ZBarConstants.SCAN_RESULT_TYPE), Toast.LENGTH_SHORT).show();
-//			String contents = scanResult.getContents();
-//			Log.d("SCANNER", contents);
-//			if (contents != null) {
-//				// success popup
-//				AlertDialog alert = new AlertDialog.Builder(Scanner.this).create();
-//				alert.setTitle("Scan Successful");
-//				alert.setButton("Continue",	new DialogInterface.OnClickListener() {
-//
-//							@Override
-//							public void onClick(DialogInterface dialog,	int which) {
-//						
-//								Log.d("UI_PRESSED", "ContinueButtonPressed");
-//
-//							}
-//						});
-//			}
+			String contents = data.getStringExtra(ZBarConstants.SCAN_RESULT);
+			Toast.makeText(this, "Scan Result = " + contents, Toast.LENGTH_SHORT).show();
+	        
+			Log.d("SCANNER", contents);
+			if (contents.equals(code)) {
+				Log.d("SCANNER", "Scan == code");
+				Integer temp = punchCard.getInt("punches", 50);
+				if (temp >= 0 && temp < 10) {
+					temp++;
+				} else {
+					temp = 0;
+				}
+				SharedPreferences.Editor editor = punchCard.edit();
+				editor.putInt("punches", temp);
+				editor.commit();
+				
+			} else {
+				Log.d("SCANNER", "Scan != code");
+			}
 		}
 		// else continue with any other code you need in the method
 	}
