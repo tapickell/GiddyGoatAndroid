@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 			
 		} else {
 			//card file doesnt contain punches need to start as new card
-			//not sure if this wiil run on first run or not????
+			//not sure if this will run on first run or not????
 			//documentation not very specific as to how to create a shared pref file.
 			Log.d("PUNCH_CARD", "added new punches field to shared pref file");
 			SharedPreferences.Editor editor = punchCard.edit();
@@ -178,6 +178,12 @@ public class MainActivity extends Activity {
 		// ####
 		MenuItem item = menu.findItem(R.id.menu_share);
 		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
+		Log.d("TESTING", "Does this ever get run???");
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "@giddygoatupdate ");
+		shareIntent.setType("text/plain");
+		mShareActionProvider.setShareIntent(shareIntent);
 
 		return true;
 	}
@@ -185,6 +191,10 @@ public class MainActivity extends Activity {
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	private void setShareIntent(Intent shareIntent) {
 		if (mShareActionProvider != null) {
+			Log.d("TESTING", "Does this ever get run???");
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_TEXT, "@giddygoatupdate ");
+			shareIntent.setType("text/plain");
 			mShareActionProvider.setShareIntent(shareIntent);
 		}
 	}
