@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -201,16 +202,25 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.drink_descrip:
 			Log.d("MENU TEST", "drink_descrip option selected");
-			//crashes hard here !!!
 			startDrinkListViewFromOptions();
 			
+			break;
+		case R.id.call:
+			Log.d("MENU TEST", "call option selected");
+			callGiddyWithPhone();
 			break;
 		}
 		return false;
 		
 	}
+	
+	private void callGiddyWithPhone() {
+		Intent callIntent = new Intent(Intent.ACTION_CALL);
+		callIntent.setData(Uri.parse("tel:5734266750"));
+		startActivity(callIntent);
+	}
 
-	public void startDrinkListViewFromOptions() {
+	private void startDrinkListViewFromOptions() {
 		Log.d("MENU TEST", "inside startDrinkListViewFromOptions method");
 
 		Intent drinksIntent = new Intent("me.toddpickell.giddygoat.DRINKSMENU");

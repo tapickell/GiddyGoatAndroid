@@ -4,15 +4,91 @@
     <array name="list">
         <item>Plain Latte</item>
         <item>Mocha</item>
+        <item>White Mocha</item>
+        <item>Cold Brewed Coffee</item>
+        <item>Shot in the Dark</item>
         <item>Breve</item>
+        <item>Americano</item>
+        <item>Chai Latte</item>
+        <item>Hot Cocoa</item>
+        <item>Steamer</item>
+        <item>Flavored Hot Cocoa</item>
+        <item>Turtle Mocha</item>
+        <item>Monkey Mocha</item>
+        <item>Elvis Mocha</item>
+        <item>Almond Joyful Mocha</item>
+        <item>German Cake Mocha</item>
+        <item>Mexican Mocha</item>
+        <item>Campfire Mocha</item>
+        <item>P.B. Mocha</item>
+        <item>Andy\'s Mint Mocha</item>
+        <item>Italian Job Mocha</item>
+        <item>Peppermint Panda</item>
+        <item>Candy Orange Mocha</item>
+        <item>Em\'s Shamrock Mocha</item>
+        <item>Macadamia Nut Mocha</item>
+        <item>Wildberry Mocha</item>
+        <item>White Hazelnut Mocha</item>
+        <item>Voldemort Latte</item>
+        <item>C3PO Latte</item>
+        <item>Caramel Macchiato</item>
+        <item>Cina-Bun Latte</item>
+        <item>Banana\'s Foster Latte</item>
+        <item>Honey Bunny Latte</item>
+        <item>Lucky Irishman Latte</item>
+        <item>Banana Bread Latte</item>
+        <item>Dumbledore</item>
         <item>Master Chief</item>
+        <item>Giddy Bomb</item>
+        <item>Hot Teas</item>
+        <item>Frozen Coffees</item>
+        <item>Seasonals</item>
+        <item>Milks Available</item>
     </array>
     
     <array name="lValues">
         <item>Our Rock-a-Billy Goat blend espresso blended with steamed milk.</item>
-        <item>Our hous blend espresso blended with milk chocolate and steamed milk.</item>
+        <item>Our house blend espresso blended with milk chocolate and steamed milk.</item>
+        <item>Our house blend espresso blended with Ghirardelli white chocolate and steamed milk.</item>
+        <item>Iced Coffee cold brewed and triple strained!</item>
+        <item>Our house blend espresso pulled and added to our fresh brewed house coffee.</item>
         <item>Our house blend espresso blended with steamed half and half.</item>
+        <item>Our house blend espresso poured over hot water...lighter in body and acidity than house coffee but bold in flavor.</item>
+        <item>We use David Rio Tiger Chai!  Creamy, sweet and spicy!</item>
+        <item>Hershey\'s syrup and steamed milk...also available with White chocolate...topped with marshmallows or whipped cream.</item>
+        <item>Any flavor syrup you want mixed with steamed milk.</item>
+        <item>Mix any flavor syrup with Hershey\'s chocolate and steamed milk.</item>
+        <item>Chocolate, Caramel and Toffee Nut.</item>
+        <item>Chocolate and Banana.</item>
+        <item>Chocolate, Peanut Butter and Banana.</item>
+        <item>Chocolate, Almond and Coconut.</item>
+        <item>Chocolate, Hazelnut, Coconut and Caramel.</item>
+        <item>Dark Chocolate and Cinnamon.</item>
+        <item>Chocolate and Toasted Marshmallow.</item>
+        <item>Chocolate and Peanut Butter.</item>
+        <item>Tastes like an Andes Mint candy!</item>
+        <item>White Chocolate and Tiramisu.</item>
+        <item>Peppermint Panda Mocha. Chocolate and Peppermint...tastes like a Yorkshire Peppermint Patty.</item>
+        <item>Dark Chocolate and Orange.</item>
+        <item>Chocolate, Peppermint and Irish Cream.</item>
+        <item>Milk Chocolate and Macadamia Nut.</item>
+        <item>Chocolate, Blackberry and Raspberry.</item>
+        <item>White Chocolate and Hazelnut.</item>
+        <item>Tastes like an almond biscotti!  Lite chocolate, almond, vanilla and Macadamia Nut.</item>
+        <item>Coconut and Irish Cream.</item>
+        <item>Yes, the one Starbucks made famous...Lite Vanilla syrup, espresso, steamed milk, topped with thick velvety foam and a caramel drizzle!</item>
+        <item>Brown Sugar and Cinnamon syrups blended with espresso, steamed milk, topped with whipped cream, caramel drizzle and cinnamon powder!</item>
+        <item>Banana, Butter Rum and Caramel.</item>
+        <item>Honey, Vanilla and Almond.</item>
+        <item>Caramel Sauce and Irish Cream.</item>
+        <item>Banana and Brown Sugar Cinnamon.</item>
+        <item>White Chocolate, Caramel, Banana and Butter Rum topped with Nutmeg.</item>
         <item>Dark Chocolate, Tiramisu and Almond</item>
+        <item>4 shots of espresso, chocolate, white chocolate, caramel and a splash of cream.</item>
+        <item>Montana Tea and Spice Co. Teas.</item>
+        <item>A blend of RA base mixes, cold brewed house espresso, milk and syrups.</item>
+        <item>Ask about our seasonal specials.</item>
+        <item>Whole, Skim, Half and Half, Soy or Almond.</item>
     </array>
 
 </resources>

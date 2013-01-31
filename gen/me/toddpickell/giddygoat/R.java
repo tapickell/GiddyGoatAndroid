@@ -54,13 +54,14 @@ public final class R {
     }
     public static final class id {
         public static final int button1=0x7f0a0003;
-        public static final int credits=0x7f0a0009;
+        public static final int call=0x7f0a0009;
+        public static final int credits=0x7f0a000a;
         public static final int drink_descrip=0x7f0a0008;
         public static final int imageView1=0x7f0a0001;
         public static final int imageView2=0x7f0a0005;
         public static final int imageView3=0x7f0a0004;
         public static final int imageView4=0x7f0a0002;
-        public static final int menu_share=0x7f0a000a;
+        public static final int menu_share=0x7f0a000b;
         public static final int mytextview=0x7f0a0007;
         public static final int textView1=0x7f0a0006;
         public static final int welcomeRelativeLayout=0x7f0a0000;
@@ -73,6 +74,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int call=0x7f040008;
         public static final int credits=0x7f040005;
         public static final int drink_descrip=0x7f040007;
         public static final int hello_world=0x7f040001;

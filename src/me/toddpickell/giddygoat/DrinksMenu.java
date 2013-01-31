@@ -34,6 +34,7 @@ public class DrinksMenu extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+
 		drinks = getResources().getStringArray(R.array.list);
 		descrips = getResources().getStringArray(R.array.lValues);
 		setListAdapter(new ArrayAdapter<String>(DrinksMenu.this,
@@ -62,4 +63,5 @@ public class DrinksMenu extends ListActivity {
 
 	}
 
+	
 }
