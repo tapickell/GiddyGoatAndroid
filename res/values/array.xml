@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="list">
+        <item>Plain Latte</item>
+        <item>Mocha</item>
+        <item>Breve</item>
+        <item>Master Chief</item>
+    </array>
+    
+    <array name="lValues">
+        <item>Our Rock-a-Billy Goat blend espresso blended with steamed milk.</item>
+        <item>Our hous blend espresso blended with milk chocolate and steamed milk.</item>
+        <item>Our house blend espresso blended with steamed half and half.</item>
+        <item>Dark Chocolate, Tiramisu and Almond</item>
+    </array>
+
+</resources>

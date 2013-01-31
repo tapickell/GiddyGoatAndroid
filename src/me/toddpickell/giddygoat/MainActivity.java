@@ -174,20 +174,51 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-		// #### should we add social integration options to menu for cleaner ui?
-		// ####
+		
 		MenuItem item = menu.findItem(R.id.menu_share);
 		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
 		Log.d("TESTING", "Does this ever get run???");
 		Intent shareIntent = new Intent();
 		shareIntent.setAction(Intent.ACTION_SEND);
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "@giddygoatupdate ");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "@TGGCHRolla ");
 		shareIntent.setType("text/plain");
 		mShareActionProvider.setShareIntent(shareIntent);
-
+		//get this to only show social and relevant optins in share menu
 		return true;
 	}
 	
+	
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch(item.getItemId()) {
+		case R.id.credits:
+			Log.d("MENU TEST", "credits option selected");
+			break;
+		case R.id.drink_descrip:
+			Log.d("MENU TEST", "drink_descrip option selected");
+			//crashes hard here !!!
+			startDrinkListViewFromOptions();
+			
+			break;
+		}
+		return false;
+		
+	}
+
+	public void startDrinkListViewFromOptions() {
+		Log.d("MENU TEST", "inside startDrinkListViewFromOptions method");
+
+		Intent drinksIntent = new Intent("me.toddpickell.giddygoat.DRINKSMENU");
+		startActivity(drinksIntent);
+
+	}
+
+
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	private void setShareIntent(Intent shareIntent) {
 		if (mShareActionProvider != null) {

@@ -8,5 +8,6 @@
     <string name="punchButton">PUNCH CARD</string>
     <string name="credits">Credits</string>
     <string name="share">Share</string>
+    <string name="drink_descrip">Drinks</string>
 
 </resources>
