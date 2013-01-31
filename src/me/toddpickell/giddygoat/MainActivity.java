@@ -23,6 +23,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.util.Linkify;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
@@ -204,26 +206,52 @@ public class MainActivity extends Activity {
 		switch (item.getItemId()) {
 		case R.id.credits:
 			Log.d("MENU TEST", "credits option selected");
+			loadCreditsScreen();
+
 			break;
+			
 		case R.id.drink_descrip:
 			Log.d("MENU TEST", "drink_descrip option selected");
 			startDrinkListViewFromOptions();
 
 			break;
+			
 		case R.id.call:
 			Log.d("MENU TEST", "call option selected");
 			callGiddyWithPhone();
+			
+			break;
+			
+		case R.id.map:
+			Log.d("MENU TEST", "map option selected");
+			openMaps();
+
 			break;
 		}
 		return false;
 
 	}
 
+	private void openMaps() {
+		Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+				Uri.parse("http://maps.google.com/maps?q=704+n+bishop+Ave+suite+2+rolla+mo+65401&ll=37.949807,-91.776859"));
+		startActivity(intent);
+	}
+
+	private void loadCreditsScreen() {
+		AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
+		alert.setTitle("Credits");
+		alert.setMessage(Html
+				.fromHtml("Developer: Todd Pickell<br><a href=http://www.toddpickell.me>www.toddpickell.me</a><br>ZBar Scanner Library: Jeff Brown<br><a href=http://zbar.sourceforge.net</a>zbar.sourceforge.net</a><br>Thanks to Ben & Jen Bell,<br>The Giddy Goat Coffee House<br><a href=http://www.tggch.com>www.tggch.com</a>"));
+
+		alert.show();
+	}
+
 	@SuppressWarnings("deprecation")
 	private void callGiddyWithPhone() {
-		
+
 		AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
-		alert.setTitle("Call 573-426-6750");
+		alert.setTitle("Calling 573-426-6750");
 		alert.setButton("Call", new DialogInterface.OnClickListener() {
 
 			@Override

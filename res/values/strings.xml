@@ -10,5 +10,6 @@
     <string name="share">Share</string>
     <string name="drink_descrip">Drinks</string>
     <string name="call">Phone</string>
+    <string name="map">Map</string>
 
 </resources>
