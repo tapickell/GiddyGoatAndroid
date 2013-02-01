@@ -14,7 +14,6 @@ import com.dm.zbar.android.scanner.ZBarScannerActivity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentCallbacks;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +23,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.util.Linkify;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.Menu;
@@ -57,37 +55,34 @@ public class MainActivity extends Activity {
 		textMarque.setText(specials);
 
 		punchCard = getSharedPreferences(CARD_FILENAME, MODE_PRIVATE);
-		Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
+		//Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
 		if (punchCard.contains("punches")) {
 			// card file already in place
 			// can I just set text view registered for changes??
 			// or do I update Int for text view then register??
 			// Android documentation is clear as mud :(
-			Log.d("PUNCH_CARD", "punch card has punches field");
-			Log.d("PUNCH_CARD",
-					Integer.toString(punchCard.getInt("punches", 69)));
-			punchCount
-					.setText(Integer.toString(punchCard.getInt("punches", 50)));
+			//Log.d("PUNCH_CARD", "punch card has punches field");
+			//Log.d("PUNCH_CARD",Integer.toString(punchCard.getInt("punches", 69)));
+			punchCount.setText(Integer.toString(punchCard.getInt("punches", 50)));
 
 		} else {
 			// card file doesnt contain punches need to start as new card
 			// not sure if this will run on first run or not????
 			// documentation not very specific as to how to create a shared pref
 			// file.
-			Log.d("PUNCH_CARD", "added new punches field to shared pref file");
+			//Log.d("PUNCH_CARD", "added new punches field to shared pref file");
 			SharedPreferences.Editor editor = punchCard.edit();
 			editor.putInt("punches", 0);
 			editor.commit();
 			// #### maybe throw this onto other thread for performance ####
 		}
-		Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
+		//Log.d("PUNCH_CARD", Integer.toString(punchCard.getInt("punches", 69)));
 		listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
 
 			@Override
 			public void onSharedPreferenceChanged(
 					SharedPreferences sharedPreferences, String key) {
-				// TODO Auto-generated method stub
-				Log.d("SHARED_PREF", key.toString());
+				//Log.d("SHARED_PREF", key.toString());
 				punchCount.setText(Integer.toString(punchCard.getInt("punches",
 						50)));
 			}
@@ -121,7 +116,7 @@ public class MainActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// goto scan view for scanning qr code for punch
-								Log.d("UI_PRESSED", "ContinueButtonPressed");
+								//Log.d("UI_PRESSED", "ContinueButtonPressed");
 								int ZBAR_SCANNER_REQUEST = 64;
 								Intent intent = new Intent(MainActivity.this,
 										ZBarScannerActivity.class);
@@ -148,7 +143,6 @@ public class MainActivity extends Activity {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//
 		if (resultCode == RESULT_OK) {
@@ -157,9 +151,9 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Scan Result = " + contents,
 					Toast.LENGTH_SHORT).show();
 
-			Log.d("SCANNER", contents);
+			//Log.d("SCANNER", contents);
 			if (contents.equals(code)) {
-				Log.d("SCANNER", "Scan == code");
+				//Log.d("SCANNER", "Scan == code");
 				Integer temp = punchCard.getInt("punches", 50);
 				if (temp >= 0 && temp < 10) {
 					temp++;
@@ -171,7 +165,7 @@ public class MainActivity extends Activity {
 				editor.commit();
 
 			} else {
-				Log.d("SCANNER", "Scan != code");
+				//Log.d("SCANNER", "Scan != code");
 			}
 		}
 		// else continue with any other code you need in the method
@@ -185,7 +179,7 @@ public class MainActivity extends Activity {
 
 		MenuItem item = menu.findItem(R.id.menu_share);
 		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
-		Log.d("TESTING", "Does this ever get run???");
+		//Log.d("TESTING", "Does this ever get run???");
 		Intent shareIntent = new Intent();
 		shareIntent.setAction(Intent.ACTION_SEND);
 		shareIntent.putExtra(Intent.EXTRA_TEXT, "@TGGCHRolla ");
@@ -205,25 +199,25 @@ public class MainActivity extends Activity {
 
 		switch (item.getItemId()) {
 		case R.id.credits:
-			Log.d("MENU TEST", "credits option selected");
+			//Log.d("MENU TEST", "credits option selected");
 			loadCreditsScreen();
 
 			break;
 			
 		case R.id.drink_descrip:
-			Log.d("MENU TEST", "drink_descrip option selected");
+			//Log.d("MENU TEST", "drink_descrip option selected");
 			startDrinkListViewFromOptions();
 
 			break;
 			
 		case R.id.call:
-			Log.d("MENU TEST", "call option selected");
+			//Log.d("MENU TEST", "call option selected");
 			callGiddyWithPhone();
 			
 			break;
 			
 		case R.id.map:
-			Log.d("MENU TEST", "map option selected");
+			//Log.d("MENU TEST", "map option selected");
 			openMaps();
 
 			break;
@@ -257,7 +251,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// goto scan view for scanning qr code for punch
-				Log.d("UI_PRESSED", "CallButtonPressed");
+				//Log.d("UI_PRESSED", "CallButtonPressed");
 				Intent callIntent = new Intent(Intent.ACTION_CALL);
 				callIntent.setData(Uri.parse("tel:5734266750"));
 				startActivity(callIntent);
@@ -275,7 +269,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void startDrinkListViewFromOptions() {
-		Log.d("MENU TEST", "inside startDrinkListViewFromOptions method");
+		//Log.d("MENU TEST", "inside startDrinkListViewFromOptions method");
 
 		Intent drinksIntent = new Intent("me.toddpickell.giddygoat.DRINKSMENU");
 		startActivity(drinksIntent);
@@ -285,7 +279,7 @@ public class MainActivity extends Activity {
 	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	private void setShareIntent(Intent shareIntent) {
 		if (mShareActionProvider != null) {
-			Log.d("TESTING", "Does this ever get run???");
+			//Log.d("TESTING", "Does this ever get run???");
 			shareIntent.setAction(Intent.ACTION_SEND);
 			shareIntent.putExtra(Intent.EXTRA_TEXT, "@giddygoatupdate ");
 			shareIntent.setType("text/plain");
@@ -297,13 +291,13 @@ public class MainActivity extends Activity {
 
 		@Override
 		protected String doInBackground(String... params) {
-			Log.d("ASYNCTASK", "doInBackground");
+			//Log.d("ASYNCTASK", "doInBackground");
 			return getTweet();
 		}
 
 		protected void onPostExecute(String result) {
 			if (result != null) {
-				Log.d("ASYNCTASK", "PostExecute: " + result);
+				//Log.d("ASYNCTASK", "PostExecute: " + result);
 				String post = specials + "      ..." + result;
 				textMarque.setText(post);
 
@@ -311,7 +305,7 @@ public class MainActivity extends Activity {
 		}
 
 		private String getTweet() {
-			Log.d("ASYNCTASK", "startGetTweet");
+			//Log.d("ASYNCTASK", "startGetTweet");
 			String status = null;
 			try {
 				// http request to get status ####
@@ -337,9 +331,9 @@ public class MainActivity extends Activity {
 				tweetJsonReader.close();
 
 			} catch (MalformedURLException e) {
-				Log.d("TWITTER_FEED", e.toString());
+				//Log.d("TWITTER_FEED", e.toString());
 			} catch (IOException e) {
-				Log.d("TWITTER_FEED", e.toString());
+				//Log.d("TWITTER_FEED", e.toString());
 			}
 
 			// return string
