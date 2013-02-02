@@ -1,16 +1,58 @@
+/* Copyright (c) 2013, Todd Pickell
+* All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*     * Redistributions of source code must retain the above copyright
+*       notice, this list of conditions and the following disclaimer.
+*     * Redistributions in binary form must reproduce the above copyright
+*       notice, this list of conditions and the following disclaimer in the
+*       documentation and/or other materials provided with the distribution.
+*     * Neither the name of the <organization> nor the
+*       names of its contributors may be used to endorse or promote products
+*       derived from this software without specific prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY TODD PICKELL ''AS IS'' AND ANY
+* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL BERND ROSSTAUSCHER BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+   * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+* ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+* (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+* SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 package me.toddpickell.giddygoat;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import net.sourceforge.zbar.Symbol;
 
 import com.dm.zbar.android.scanner.ZBarConstants;
 import com.dm.zbar.android.scanner.ZBarScannerActivity;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -138,18 +180,17 @@ public class MainActivity extends Activity {
 							}
 						});
 				alert.show();
-			}
-		});
+			}//end onClick
+		});//end setOnClickListener
 
-	}
+	}//end onCreate
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		//
 		if (resultCode == RESULT_OK) {
 			// handle scan result
 			String contents = data.getStringExtra(ZBarConstants.SCAN_RESULT);
-			Toast.makeText(this, "Scan Result = " + contents,
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Scan Successful", Toast.LENGTH_SHORT).show();
 
 			//Log.d("SCANNER", contents);
 			if (contents.equals(code)) {
@@ -166,25 +207,32 @@ public class MainActivity extends Activity {
 
 			} else {
 				//Log.d("SCANNER", "Scan != code");
+				Toast.makeText(this, "Incorrect Punch!!!", Toast.LENGTH_SHORT).show();
 			}
 		}
 		// else continue with any other code you need in the method
-	}
+	}//end onActvityResult
 
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	//need option for versions lower than ICS
+	
+	@SuppressLint("NewApi")
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 
-		MenuItem item = menu.findItem(R.id.menu_share);
-		mShareActionProvider = (ShareActionProvider) item.getActionProvider();
-		//Log.d("TESTING", "Does this ever get run???");
-		Intent shareIntent = new Intent();
-		shareIntent.setAction(Intent.ACTION_SEND);
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "@TGGCHRolla ");
-		shareIntent.setType("text/plain");
-		mShareActionProvider.setShareIntent(shareIntent);
+		if (Build.VERSION.SDK_INT >= 14) {
+			//this could be if version >= 14
+			MenuItem item = menu.findItem(R.id.menu_share);
+			mShareActionProvider = (ShareActionProvider) item
+					.getActionProvider();
+			//Log.d("TESTING", "Does this ever get run???");
+			Intent shareIntent = new Intent();
+			shareIntent.setAction(Intent.ACTION_SEND);
+			shareIntent.putExtra(Intent.EXTRA_TEXT, "@TGGCHRolla ");
+			shareIntent.setType("text/plain");
+			mShareActionProvider.setShareIntent(shareIntent);
+		}
 		// get this to only show social and relevant optins in share menu
 		return true;
 	}
@@ -298,37 +346,76 @@ public class MainActivity extends Activity {
 		protected void onPostExecute(String result) {
 			if (result != null) {
 				//Log.d("ASYNCTASK", "PostExecute: " + result);
-				String post = specials + "      ..." + result;
+				String post = specials + "      ...     " + result;
 				textMarque.setText(post);
 
 			}
 		}
 
+		
+		
+		@SuppressLint("NewApi")
 		private String getTweet() {
 			//Log.d("ASYNCTASK", "startGetTweet");
 			String status = null;
 			try {
 				// http request to get status ####
 				// https://api.twitter.com/1/statuses/user_timeline.json?screen_name=giddygoatupdate&count=1
-				URL url = new URL(
-						"https://api.twitter.com/1/statuses/user_timeline.json?screen_name=giddygoatupdate&count=1");
+				URL url = new URL("https://api.twitter.com/1/statuses/user_timeline.json?screen_name=giddygoatupdate&count=1");
+
 				Reader tweetReader = new InputStreamReader(url.openStream());
-
-				// json parsing to get just status ####
-				// "text":"Testing 1,2,3....come on app blackboard!", ####
-				JsonReader tweetJsonReader = new JsonReader(tweetReader);
-				tweetJsonReader.beginArray();// crash!!!
-				tweetJsonReader.beginObject();
-
-				while (tweetJsonReader.hasNext()) {
-					String name = tweetJsonReader.nextName();
-					if (name.equals("text")) {
-						status = tweetJsonReader.nextString();
-					} else {
-						tweetJsonReader.skipValue();
+				
+				if (Build.VERSION.SDK_INT >= 11) {
+					//version is honeycomb or greater
+					// json parsing to get just status ####
+					// "text":"Testing 1,2,3....come on app blackboard!", ####
+					//### JsonReader doesnt exist in 2.3 ###
+					JsonReader tweetJsonReader = new JsonReader(tweetReader);
+					tweetJsonReader.beginArray();// crash!!!
+					tweetJsonReader.beginObject();
+					while (tweetJsonReader.hasNext()) {
+						String name = tweetJsonReader.nextName();
+						if (name.equals("text")) {
+							status = tweetJsonReader.nextString();
+						} else {
+							tweetJsonReader.skipValue();
+						}
+					}
+					tweetJsonReader.close();
+				} else {
+					//version is gingerbread
+					//parse json old fashioned way???
+					// Making HTTP request
+				    JSONObject last = null;
+			        try {
+			            // defaultHttpClient
+			            DefaultHttpClient httpClient = new DefaultHttpClient();
+			            HttpGet get = new HttpGet(url.toString());
+			 
+			            HttpResponse httpResponse = httpClient.execute(get);
+			            int statCode = httpResponse.getStatusLine().getStatusCode();
+			            if (statCode == 200) {
+							HttpEntity httpEntity = httpResponse.getEntity();
+							String data = EntityUtils.toString(httpEntity);
+							JSONArray timeLine = new JSONArray(data);
+							last = timeLine.getJSONObject(0);
+							//Log.d("#PARSE OLDSCHOOL", last.toString());
+							String text = last.getString("text");
+							Log.d("#PARSE OLDSCHOOL", "tweet: " + text);
+							status = text;
+						}           
+			 
+			        } catch (UnsupportedEncodingException e) {
+			            e.printStackTrace();
+			        } catch (ClientProtocolException e) {
+			            e.printStackTrace();
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        } catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
-				tweetJsonReader.close();
 
 			} catch (MalformedURLException e) {
 				//Log.d("TWITTER_FEED", e.toString());
