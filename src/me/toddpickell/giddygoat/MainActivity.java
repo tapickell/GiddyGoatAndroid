@@ -25,32 +25,24 @@
 */
 package me.toddpickell.giddygoat;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
+
+import net.sourceforge.zbar.Symbol;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import net.sourceforge.zbar.Symbol;
-
-import com.dm.zbar.android.scanner.ZBarConstants;
-import com.dm.zbar.android.scanner.ZBarScannerActivity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -74,6 +66,9 @@ import android.widget.Button;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dm.zbar.android.scanner.ZBarConstants;
+import com.dm.zbar.android.scanner.ZBarScannerActivity;
 
 public class MainActivity extends Activity {
 
@@ -147,10 +142,16 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// display scan view for punch
-				AlertDialog alert = new AlertDialog.Builder(MainActivity.this)
-						.create();
-				alert.setTitle("Hand Phone to Barista");
-				alert.setMessage("Please hand your phone to your Giddy Goat Barista. They will add a punch to your card for you.");
+				AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
+				//if 10 punch create custom dialog
+				if (true /*punchCard.getInt("punches", 50) == 10*/) {
+					alert.setTitle("YOUR PUNCH CARD IS FULL!!!");
+					alert.setMessage("Congrats on filling the punches on your Giddy Goat card. Please hand your iPhone to the Barista and they will give you the discount.");
+			
+				} else {
+					alert.setTitle("Hand Phone to Barista");
+					alert.setMessage("Please hand your phone to your Giddy Goat Barista. They will add a punch to your card for you.");
+				}
 				alert.setButton("Continue",
 						new DialogInterface.OnClickListener() {
 
@@ -158,7 +159,7 @@ public class MainActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								// goto scan view for scanning qr code for punch
-								//Log.d("UI_PRESSED", "ContinueButtonPressed");
+								// Log.d("UI_PRESSED", "ContinueButtonPressed");
 								int ZBAR_SCANNER_REQUEST = 64;
 								Intent intent = new Intent(MainActivity.this,
 										ZBarScannerActivity.class);
@@ -179,6 +180,7 @@ public class MainActivity extends Activity {
 
 							}
 						});
+				
 				alert.show();
 			}//end onClick
 		});//end setOnClickListener
