@@ -52,6 +52,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -59,6 +60,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -144,10 +146,12 @@ public class MainActivity extends Activity {
 				// display scan view for punch
 				AlertDialog alert = new AlertDialog.Builder(MainActivity.this).create();
 				//if 10 punch create custom dialog
-				if (true /*punchCard.getInt("punches", 50) == 10*/) {
-					alert.setTitle("YOUR PUNCH CARD IS FULL!!!");
-					alert.setMessage("Congrats on filling the punches on your Giddy Goat card. Please hand your iPhone to the Barista and they will give you the discount.");
-			
+				if (punchCard.getInt("punches", 50) == 10) {
+					
+					LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+					final View customView = factory.inflate(R.layout.customalert, null);
+					alert.setView(customView);
+					
 				} else {
 					alert.setTitle("Hand Phone to Barista");
 					alert.setMessage("Please hand your phone to your Giddy Goat Barista. They will add a punch to your card for you.");

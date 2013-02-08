@@ -39,34 +39,25 @@ public final class R {
         public static final int topMarginTitleSmaller=0x7f070002;
     }
     public static final class drawable {
-        public static final int backgroundblue2x=0x7f020000;
-        public static final int baristascantitle=0x7f020001;
-        public static final int bkgdwoodgrain2x=0x7f020002;
-        public static final int creditstitle=0x7f020003;
-        public static final int frame=0x7f020004;
-        public static final int giddygoatcardfinal=0x7f020005;
-        public static final int giddykitty=0x7f020006;
-        public static final int giddytitledark1=0x7f020007;
-        public static final int giddytitledark2=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int punch_button=0x7f02000a;
-        public static final int red_and_star=0x7f02000b;
-        public static final int splash_screen=0x7f02000c;
+        public static final int bkgdwoodgrain2x=0x7f020000;
+        public static final int giddygoatcardfinal=0x7f020001;
+        public static final int giddytitledark1=0x7f020002;
+        public static final int giddytitledark2=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int punchcardfull=0x7f020005;
     }
     public static final class id {
         public static final int button1=0x7f0a0003;
-        public static final int call=0x7f0a000c;
-        public static final int credits=0x7f0a000d;
-        public static final int drink_descrip=0x7f0a000a;
-        public static final int image=0x7f0a0008;
+        public static final int call=0x7f0a000a;
+        public static final int credits=0x7f0a000b;
+        public static final int drink_descrip=0x7f0a0008;
         public static final int imageView1=0x7f0a0001;
         public static final int imageView2=0x7f0a0005;
         public static final int imageView3=0x7f0a0004;
         public static final int imageView4=0x7f0a0002;
-        public static final int map=0x7f0a000b;
-        public static final int menu_share=0x7f0a000e;
+        public static final int map=0x7f0a0009;
+        public static final int menu_share=0x7f0a000c;
         public static final int mytextview=0x7f0a0007;
-        public static final int text=0x7f0a0009;
         public static final int textView1=0x7f0a0006;
         public static final int welcomeRelativeLayout=0x7f0a0000;
     }
